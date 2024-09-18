@@ -53,3 +53,4 @@ def test_syracuse():
     assert(syracuse(2, 6)) == 10
     assert(syracuse(3, 6)) == 5
     assert(syracuse(0, 6)) == 6
+    assert(syracuse(0, 6)) == 6
