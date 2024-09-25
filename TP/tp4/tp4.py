@@ -118,6 +118,14 @@ def est_alphabet(str):
     return str in 'azertyuiopmlkjhgfdsqwxcvbnAZERTYUIOPMLKJHGFDSQWXCVBN' 
 
 def decoupe_mot(chaine):
+    """decoupe les mots d'une chaine de caratère
+
+    Args:
+        chaine (str): 
+
+    Returns:
+        liste_mot (list): liste des mots découpé
+    """
     if chaine == '':
         return []
     
@@ -138,5 +146,20 @@ def decoupe_mot(chaine):
 
 def test_decoupe_mot():
     assert decoupe_mot('Bonjour tout le monde')  == ['Bonjour', 'tout', 'le', 'monde']     
-    assert decoupe_mot('Bonjour ')  == ['Bonjour']       
+    assert decoupe_mot('Bonjour ')  == ['Bonjour']      
+    assert decoupe_mot('2*4')  == []   
+    assert decoupe_mot('')  == [] 
 
+def trouve_mot(chaine, car)    :
+    """trouve les mots qui commencent par la lettre donné
+
+    Args:
+        chaine (str): chaine de carartère 
+        car (str): lettre
+
+    Returns:
+        liste_mot (list): 
+    """
+    return recherche_mot(decoupe_mot(chaine), car)
+
+#def test_trouve_mot('')
