@@ -104,7 +104,8 @@ def recherche_mot(lst, lettre):
     if lst == []:
         return []
     
-    return [lst[i]   for i in range(len(lst))   if lst[i][0] == lettre]
+   #return [lst[i]   for i in range(len(lst))   if lst[i][0] == lettre] par indice
+    return [mot   for mot in lst   if mot[0] == lettre  ] #par élément
 
 def test_recherche_mot():
     assert(recherche_mot(['hello', 'hello'], 'h' )) == ['hello', 'hello']
@@ -162,4 +163,99 @@ def trouve_mot(chaine, car)    :
     """
     return recherche_mot(decoupe_mot(chaine), car)
 
-#def test_trouve_mot('')
+def test_trouve_mot():
+    assert trouve_mot('tttttttttttttttttttttt', 't') == ['tttttttttttttttttttttt']
+    assert trouve_mot('t ttttttttttttttttttttt', 't') == ['t','ttttttttttttttttttttt']
+    assert trouve_mot('t tttttttttttttttttttt t', 't') == ['t', 'tttttttttttttttttttt' ,'t']
+    assert trouve_mot('', 't') == []
+    assert trouve_mot('bien le bonjour ', 'b') == ['bien', 'bonjour']
+    assert trouve_mot('Bien le Bonjour ', 'B') == ['Bien', 'Bonjour']
+
+#exercice 7 
+def n_plus_un_bool(n) :
+    """renvoie une liste de n + 1 True commençant par deux False si n est assez grand
+
+    Args:
+        n (int): 
+
+    Raises:
+        ValueError: n doit être positif
+
+    Returns:
+        _lst_final (list): _description_
+    """
+    if n < 0 :
+        raise ValueError('n doit être superieur ou egal a 0')
+    if n == 0 :
+        return [False]
+    elif n == 1 :
+        return [False, False]
+    
+    elif n >= 2 :
+        lst_final = [False, False]
+        for _ in range(n - 1):
+            lst_final.append(True)
+        return lst_final
+
+def test_n_plu_un_bool():
+    assert n_plus_un_bool(4) == [False, False, True, True, True]
+    assert n_plus_un_bool(0) == [False]
+    assert n_plus_un_bool(1) == [False, False]
+    assert n_plus_un_bool(9) == [False, False, True, True, True, True, True, True, True, True]
+
+def faux_mult_x(lst_bol, x):
+    """met à False tous les booléens d’indice multiple de x
+
+    Args:
+        lst_bol (list): liste de booleen
+        x (int): entier superieur à 1
+
+    Raises:
+        ValueError: x doit être superieur à 1
+
+    Returns:
+        lst_final : liste de booleen
+    """
+    if x < 2 :
+        raise ValueError('x doit être superieur à 1')
+    
+    for i in range(0, len(lst_bol), x):
+        if i != x :
+            lst_bol[i] = False
+    return lst_bol        
+
+def test_faux_mult_x():
+    assert faux_mult_x(n_plus_un_bool(4), 2) == [False, False, True, True, False]
+    assert faux_mult_x(n_plus_un_bool(9), 2) == [False, False, True, True, False, True, False, True, False, True]
+    assert faux_mult_x(n_plus_un_bool(9), 9) == [False, False, True, True, True, True, True, True, True, True ]
+    assert faux_mult_x(n_plus_un_bool(9), 45) == [False, False, True, True, True, True, True, True, True, True ]
+    assert faux_mult_x(n_plus_un_bool(2), 2) == [False, False, True ]
+
+def n_premier(n):
+    """ranvoie la liste des n nombres premiers
+
+    Args:
+        n (int): superieur à 0
+
+    Returns:
+        lst_final: liste des n nombres premiers
+    """
+    if n < 1 :
+        return []
+    
+    lst_n = n_plus_un_bool(n) 
+    for i in range(2, n):
+        lst_n = faux_mult_x(lst_n, i)
+
+    lst_final = []
+    for j in range(2, len(lst_n)) :
+        if lst_n[j] == True:
+           lst_final.append(j)
+    return lst_final   
+
+def test_n_premier():
+    assert n_premier(6) == [2, 3, 5]
+    assert n_premier(7) == [2, 3, 5, 7]
+    assert n_premier(1) == []
+    assert n_premier(10) == [2, 3, 5, 7,]
+    assert n_premier(20) == [2, 3, 5, 7, 11, 13, 17, 19]
