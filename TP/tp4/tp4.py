@@ -240,22 +240,24 @@ def n_premier(n):
     Returns:
         lst_final: liste des n nombres premiers
     """
-    if n < 1 :
-        return []
-    
-    lst_n = n_plus_un_bool(n) 
-    for i in range(2, n):
-        lst_n = faux_mult_x(lst_n, i)
+    if n <= 1 :
+        lst_final = []
 
-    lst_final = []
-    for j in range(2, len(lst_n)) :
-        if lst_n[j] == True:
-           lst_final.append(j)
+    else:
+        lst_final = []
+        lst_n = n_plus_un_bool(n) 
+        for i in range(2, n):
+            lst_n = faux_mult_x(lst_n, i)
+
+            if lst_n[i]:
+               lst_final.append(i)
+            
+
     return lst_final   
 
 def test_n_premier():
     assert n_premier(6) == [2, 3, 5]
-    assert n_premier(7) == [2, 3, 5, 7]
+    assert n_premier(8) == [2, 3, 5, 7]
     assert n_premier(1) == []
     assert n_premier(10) == [2, 3, 5, 7,]
     assert n_premier(20) == [2, 3, 5, 7, 11, 13, 17, 19]
