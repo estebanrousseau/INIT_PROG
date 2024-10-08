@@ -56,10 +56,10 @@ def nb_in_str(car):
     """renvoie l'indice du premier nombre dans la chaine de caractère
 
     Args:
-        car (str): 
+        car (str): une chaine de caractère 
 
     Returns:
-        i (int): 
+        i (int): indice du premier nombre dans la chaine de caractère
     """
 
     for i in range(len(car)):
@@ -89,9 +89,9 @@ def pop_ville(lst_v, lst_p, ville):
     """renvoie le nombre de population d'une ville si elle existe
 
     Args:
-        lst_v (list): 
-        lst_p (list): 
-        ville (list): 
+        lst_v (list): liste de ville
+        lst_p (list): liste de population
+        ville (str): une ville
 
     Returns:
         _int : population de la ville attendue
@@ -115,10 +115,10 @@ def croissant(lst):
     """trouve si la liste est croissante 
 
     Args:
-        lst (list): 
+        lst (list): liste de valeur 
 
     Returns:
-        bool: 
+        bool: vrai si la liste est croissante et faux dans le cas contraire
     """
     prec = lst[0]
     res = True
@@ -142,19 +142,20 @@ def depasse_som_liste(lst, val):
     """ revoie True si la valeur entrée en paramètre depasse la somme totale de la liste
 
     Args:
-        lst (list):
-        val (int): 
+        lst (list): liste de valeurs
+        val (int): une valeur 
     Returns:
-        bool: 
+        bool: vrai si val depasse la somme de la liste et faux dans le cas contraire 
     """
     if lst == []:
-        return False
-    
-    som = 0
-    #som contient la somme des élément de la liste parcourue jusqu'à présent
-    for nb in lst :
-        som += nb 
-    return som < val 
+        res = False
+    else:
+        res = 0
+        #som contient la somme des élément de la liste parcourue jusqu'à présent
+        for nb in lst :
+            res += nb 
+        res = res <  val  
+    return   res 
 
 def test_depasse_som_liste():
     assert depasse_som_liste([1,2,3,4], 11)
@@ -167,34 +168,27 @@ def email(car):
     """test si un email est correct
 
     Args:
-        car (str): 
+        car (str): un email
 
     Returns:
-        bool: 
+        bool: vrai si l'email est correct et faux si il ne l'est pas 
     """
-    if car[0] == '@':
-        return False
-    
-    elif car[-1] == '.':
-        return False
-    
+
     a_plus_point = False
     arobase = 0 
 
+    if not car[0] == '@' and not car[-1] == '.':
     #arobase contient le nombre d'arobase trouver 
     #a_plus_point dit si un arobase et un point on été trouver sucsessivement
-    for i in range(1, len(car) - 2):
-        if car[i] == ' ':
-            return False
-        
-        elif car[i] == '@' and car[i + 1] == '.':
-            a_plus_point = True
+        for i in range(1, len(car) - 2):
 
-        if car[i] == '@' :
-            arobase += 1  
+            if car[i] == '@' :
+                arobase += 1  
+                if car[i + 1] == '.':
+                    a_plus_point = True
 
-        if arobase == 2 :
-            return False      
+            if arobase == 2 or car[i] == ' ':
+                return False      
 
     return a_plus_point        
 
@@ -212,16 +206,21 @@ def test_email():
 
 
 
+
+# exercice 4 
+
+#4.1
+ 
 def meilleur_score(lst_j, lst_s, prenom):
     """trouve le meilleur score d'un joueur
 
     Args:
-        lst_j (list): 
-        lst_s (lsit): 
-        prenom (list)): 
+        lst_j (list): liste de joueur
+        lst_s (list): liste de score
+        prenom (str):  prenom d'un joueur
 
     Returns:
-        int: 
+        int: meilleur score du joueur
     """
     if lst_j == [] or lst_s == []:
         res =  None
@@ -243,14 +242,20 @@ def test_meilleur_score():
     assert meilleur_score(joueurs, scores, 'Robin') == 325410
     assert not meilleur_score(joueurs, scores, 'Batman') == 312785
 
+
+
+#4.2
+
+
+
 def score_decroissant(lst_score):
     """trouve si la liste est decroissante 
 
     Args:
-        lst (list): 
+        lst (list): liste des scores
 
     Returns:
-        bool: 
+        bool: vrai si lst_score est decroissante et faux dans le cas contraire
     """
     prec = lst_score[0]
 
@@ -269,6 +274,12 @@ def test_score_decroissant():
     assert not score_decroissant([9,8,7,6,5,4,9,3,2,1])
     assert score_decroissant([2,1])
 
+
+
+
+#4.3
+
+
 scores = [352100, 325410, 312785, 220199, 127853]
 joueurs = ['Batman', 'Robin', 'Batman', 'Joker', 'Batman']  
 
@@ -276,11 +287,11 @@ def apparition_score_joueur(lst_j, prenom):
     """ retourne combien de fois un joueur apparaît dans les meilleurs scores
 
     Args:
-        lst_j (list): 
-        prenom (list): 
+        lst_j (list): liste de joueur
+        prenom (list): prnom d'un joueur
 
     Returns:
-        int : 
+        int : nombre d'apparition du joueur dans la liste
     """
     if lst_j == []:
         return None
@@ -299,16 +310,22 @@ def test_meilleur_score_joueur():
     assert apparition_score_joueur(joueurs, 'Joker') == 1  
     assert apparition_score_joueur([], 'Batman') == None  
 
+
+
+
+#4.4
+
+
 def meilleur_classement(lst_j, lst_s, prenom):
-    """renvoie le meilleur classemnt du joueur 
+    """renvoie le meilleur classement du joueur 
 
     Args:
-        lst_j (list): 
-        lst_s (list):
-        prenom (list):
+        lst_j (list): liste de joueur
+        lst_s (list): liste de score
+        prenom (list): prenom du joueur
 
     Returns:
-        int: 
+        int: indice de la première apparition du joueur
     """
     meilleur_s = meilleur_score(lst_j, lst_s, prenom)    
     if meilleur_s is None :
@@ -325,22 +342,27 @@ def test_meilleur_classement():
     assert meilleur_classement(joueurs, scores, 'Joker') == 3
     assert not meilleur_classement(joueurs, scores, 'Batman') == 1
 
+
+#4.5
 def inserer_score(lst_s, score):
     """trouve le bon indice ou inserer le score
 
     Args:
-        lst_s (list): 
-        score (int): 
+        lst_s (list):  liste de score
+        score (int):  score du joueur
 
     Returns:
-        int: 
+        int: indice de l'endroit ou insérer le score
     """
     if lst_s == []:
-        return None
-    for i in range(len(lst_s)):
-        if score > lst_s[i]:
-            return i 
-    return i + 1
+        i  = None
+
+    else:
+        for i in range(len(lst_s)):
+            if score > lst_s[i]:
+                return i 
+        i += 1     
+    return i 
 
 def test_inserer_score():
     assert inserer_score(scores, 314570) == 2
@@ -348,7 +370,40 @@ def test_inserer_score():
     assert inserer_score(scores, 9999314570) == 0
     assert inserer_score(scores, 200000) == 4
 
+
+
+
+#4.6
+
 def inserer_joueur_et_score(lst_j, lst_s, prenom, score):
+    """modifie la liste de score en ajoutant le score
+       au bon endroit dans la liste 
+
+    Args:
+        lst_j (list): liste de joueur
+        lst_s (list): liste de score
+        prenom (str): nouveau prenom à ajouter
+        score (int): nouveau score à ajouter
+    """
     indice_inserer = inserer_score(lst_s, score)
     lst_j.insert(indice_inserer, prenom)
     lst_s.insert(indice_inserer, score)
+
+
+def test_inserer_joueur_et_score()  :
+
+    scores = [352100, 325410, 312785, 220199, 127853]
+    joueurs = ['Batman', 'Robin', 'Batman', 'Joker', 'Batman']  
+
+    inserer_joueur_et_score(joueurs, scores, 'Eude', 1 )
+
+    assert   scores == [352100, 325410, 312785, 220199, 127853, 1] 
+    assert   joueurs == ['Batman', 'Robin', 'Batman', 'Joker', 'Batman', 'Eude'] 
+
+    inserer_joueur_et_score(joueurs, scores, 'Jean', 500000 )
+
+    assert   scores == [500000, 352100, 325410, 312785, 220199, 127853, 1] 
+    assert   joueurs == ['Jean', 'Batman', 'Robin', 'Batman', 'Joker', 'Batman', 'Eude'] 
+
+    scores = [352100, 325410, 312785, 220199, 127853]
+    joueurs = ['Batman', 'Robin', 'Batman', 'Joker', 'Batman']  
