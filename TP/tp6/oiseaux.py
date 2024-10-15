@@ -87,6 +87,9 @@ def oiseau_le_plus_observe_i(liste_observations):
 #exercice 2 
 #-----------------------------------------------------------------------------------------------
 
+#-----------------------------------------------------------------------------------------------
+#2.1
+#-----------------------------------------------------------------------------------------------
 
 def caracteristique(lst_oiseau, nom):
     """permet de retrouver les caractéristiques (nom,famille) d’un oiseau
@@ -106,3 +109,70 @@ def caracteristique(lst_oiseau, nom):
         if woiso[0] == nom :
             return woiso
     return None 
+
+
+#-----------------------------------------------------------------------------------------------
+#2.2
+#-----------------------------------------------------------------------------------------------
+
+def meme_fammille(lst_oiseau, nom):
+    """trouve tous les oiseaux appartenant à la famille entré en parametre 
+
+    Args:
+        lst_oiseau (list): liste de tuple oiseau,famille
+        nom (str): nom de famille  
+
+    Returns:
+        list: mliste de tout les oiseaux
+    invariant:
+        lst_final contient tout les oiseaux appartenant au nom de famille entré en parametre 
+    """
+    lst_final = []
+    for woiso in lst_oiseau:
+        if woiso[1] == nom :
+            lst_final.append(woiso[0])
+    return lst_final        
+
+#-------------------------------------------------------------------------------------------------
+#exercice 3
+#-------------------------------------------------------------------------------------------------
+
+def verif_observation(lst):
+    """verifie si une liste d'observation est construite correctement 
+
+    Args:
+        lst (list): liste d'observation
+
+    Returns:
+        bool: vrai si elle est bien construite et faux sinon
+    invariant:
+        la liste d'observation est bien construite 
+    """
+    if lst == []:
+        return False
+    else :
+        for woiso in lst :
+            if not type(woiso[1]) is int : 
+                return False
+        return True    
+    
+#------------------------------------------------
+# #3.2
+# -----------------------------------------------
+
+def max_oiseaux(lst):
+    """donne le plus grand nombre de spécimens observés dans une liste
+        d’observations
+
+    Args:
+        lst (list): liste d'observation
+
+    Returns:
+        int: maximum d'appartion d'oiseaux et None si la liste est vide
+    """
+    if lst != []:
+        maxi = lst[0][1]
+        for woiso in lst :
+            if woiso[1] > maxi :
+                maxi = woiso[1]
+        return maxi            
