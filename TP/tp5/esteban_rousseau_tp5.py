@@ -65,7 +65,7 @@ def nb_in_str(car):
     Returns:
         i (int): indice du premier nombre dans la chaine de caractère
     """
-    # invariant aucun caractere de type nombre n'a été trouver
+    # invariant aucun caractere de type nombre n'a été trouver jusqu'à i ittération
     for i in range(len(car)):
         if car[i] >= '0' and car[i] <= '9':
             return i 
@@ -100,7 +100,7 @@ def pop_ville(lst_v, lst_p, ville):
     Returns:
         _int : population de la ville attendue
     """
-    # invariant la ville n'a pas été trouver
+    # invariant la ville n'a pas été trouver jusqu'à i ittération
     for i in range(len(lst_v)):
         if lst_v[i] == ville :
             return lst_p[i]
@@ -132,6 +132,7 @@ def croissant(lst):
 
         #res dit si la liste parcourue jusqu'à présent est croissante
         #prec contient la valeur de l'avant dernier élément de la liste
+        #invariant : la liste est croissante jusqu'à i ittération
         for i in range(1, len(lst)):
             if lst[i] < prec :
                 return False
@@ -159,7 +160,7 @@ def depasse_som_liste(lst, val):
         res = False
     else:
         res = 0
-        #som contient la somme des élément de la liste parcourue jusqu'à présent
+        #som contient la somme des élément de la liste parcourue jusqu'à i ittération
         for nb in lst :
             res += nb 
             if res < val :
@@ -187,8 +188,8 @@ def email(car):
     arobase = 0 
 
     if not car[0] == '@' and not car[-1] == '.':
-    #arobase contient le nombre d'arobase trouver 
-    #a_plus_point dit si un arobase et un point on été trouver sucsessivement
+    #arobase contient le nombre d'arobase trouver jusqu'à i ittération
+    #a_plus_point dit si un arobase et un point on été trouver sucsessivement jusqu'à i ittération
         for i in range(1, len(car) - 2):
 
             if car[i] == '@' :
@@ -238,7 +239,7 @@ def meilleur_score(lst_j, lst_s, prenom):
         res = 0
 
         #res contient à chaque tour de boucle le 
-        #    meilleur score trouver jusqu'à present
+        #    meilleur score trouver jusqu'à i ittération
         for i in range(len(lst_j)):
             if lst_s[i] > res and lst_j[i] == prenom :
                 res = lst_s[i]
@@ -271,7 +272,7 @@ def score_decroissant(lst_score):
     #prec contient à chaque tour de boucle les 
     #     valeurs sucsessives de la liste
 
-    #invariant continue tant que la liste est décroissante
+    #invariant la liste est décroissante jusqu'à i ittération
     for i in range(len(lst_score)):
         if lst_score[i] > prec :
             return False 
@@ -309,7 +310,7 @@ def apparition_score_joueur(lst_j, prenom):
     else:
         cmp = 0 
         #cmp contient le nombre de fois ou de le  
-        #    prenom à été rencontré jusqu'à présent
+        #    prenom à été rencontré jusqu'à i ittération
         for nom in lst_j:
             if nom == prenom:
                 cmp += 1
@@ -343,7 +344,7 @@ def meilleur_classement(lst_j, lst_s, prenom):
         return None  
 
     else:
-        # invariant : le prenom n'a pas été trouver dans la liste
+        # invariant : le prenom n'a pas été trouver dans la liste jusqu'à i ittération
         for i in range(len(lst_s)):
             if lst_j[i] == prenom:
                 return i 
@@ -371,7 +372,7 @@ def inserer_score(lst_s, score):
         i  = None
 
     else:
-        #l'emplacement ideal n'a pas été trouver 
+        #l'emplacement ideal n'a pas été trouver jusqu'à i ittération
         for i in range(len(lst_s)):
             if score > lst_s[i]:
                 return i 
