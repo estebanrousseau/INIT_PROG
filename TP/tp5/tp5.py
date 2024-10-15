@@ -11,7 +11,7 @@ def mystere(liste, valeur):
     xxx = 0
     yyy = 0
     #xxx contient le nombre de valeur parcourue 
-    #yyy contient le nombre de valeur de la liste egale à la valeur rentrée en paramètre 
+    #yyy contient le nombre de valeur de la liste egale à la valeur rentrée en paramètre tant qu'il ne depasse pas 3
     for elem in liste:
         if elem == valeur:
             yyy += 1
@@ -21,7 +21,7 @@ def mystere(liste, valeur):
     return None
 
 
-def mystere_i(liste, valeur):
+def mystere_i(liste, valeur): # changer les noms de variables
     """renvoie l'indice de du 4ème nombre egal au nombre entrée en paramètre 
 
     Args:
@@ -31,13 +31,13 @@ def mystere_i(liste, valeur):
     Returns:
         [int]: indice du 4éme nombre egal au nombre entrée en paramètre 
     """
-    yyy = 0
+    cmp = 0
     #xxx contient le nombre de valeur parcourue 
     #yyy contient le nombre de valeur de la liste egale à la valeur rentrée en paramètre 
     for i in range(len(liste)):
         if liste[i] == valeur:
-            yyy += 1
-            if yyy > 3:
+            cmp += 1
+            if cmp > 3:
                 return i # s'éxecute quand yyy > 3 donc quand 4 valeurs de la liste sont egaux à la valeur rentrée en paramètre 
        
     return None
@@ -47,7 +47,11 @@ def mystere_i(liste, valeur):
 
 mystere([12, 5, 8, 48, 12, 418, 185, 17, 5, 87], 20)
 
-
+def test_mystere_i():
+    assert mystere_i([1,1,1,1], 1) == 3
+    assert mystere_i([1,1,1,1], 2) is None
+    assert mystere_i([], 2) is None
+    assert mystere_i([1,1,1,12,2,2,2,2], 2) == 7
 
 
 #exercice 2 
@@ -61,9 +65,9 @@ def nb_in_str(car):
     Returns:
         i (int): indice du premier nombre dans la chaine de caractère
     """
-
+    # invariant aucun caractere de type nombre n'a été trouver
     for i in range(len(car)):
-        if car[i] in '0123456789':
+        if car[i] >= '0' and car[i] <= '9':
             return i 
     return None    
 
@@ -96,12 +100,11 @@ def pop_ville(lst_v, lst_p, ville):
     Returns:
         _int : population de la ville attendue
     """
-    res = None
-    #res contient le nombre d'habitant d'une ville si elle à été trouver
+    # invariant la ville n'a pas été trouver
     for i in range(len(lst_v)):
         if lst_v[i] == ville :
-            res = lst_p[i]
-    return res         
+            return lst_p[i]
+    return None         
 
 def test_pop_ville():
     assert pop_ville(liste_villes, population,'Chartres' ) == 38426
@@ -120,14 +123,19 @@ def croissant(lst):
     Returns:
         bool: vrai si la liste est croissante et faux dans le cas contraire
     """
-    prec = lst[0]
-    res = True
-    #res dit si la liste parcourue jusqu'à présent est croissante
-    #prec contient la valeur de l'avant dernier élément de la liste
-    for i in range(1, len(lst)):
-        if lst[i] < prec :
-            res = False
-        prec = lst[i] 
+    if len(lst) == 0 :
+        res = False
+
+    else :    
+        prec = lst[0]
+        res = True
+
+        #res dit si la liste parcourue jusqu'à présent est croissante
+        #prec contient la valeur de l'avant dernier élément de la liste
+        for i in range(1, len(lst)):
+            if lst[i] < prec :
+                return False
+            prec = lst[i] 
 
     return  res        
 
@@ -154,13 +162,14 @@ def depasse_som_liste(lst, val):
         #som contient la somme des élément de la liste parcourue jusqu'à présent
         for nb in lst :
             res += nb 
-        res = res <  val  
-    return   res 
+            if res < val :
+                return True
+    return False
 
 def test_depasse_som_liste():
     assert depasse_som_liste([1,2,3,4], 11)
     assert depasse_som_liste([1,2,3,4,5], 16)
-    assert not depasse_som_liste([1,2,3,4], 10)
+    assert depasse_som_liste([1,2,3,4], 10)
     assert not depasse_som_liste([], 18)
 
 
@@ -261,6 +270,8 @@ def score_decroissant(lst_score):
 
     #prec contient à chaque tour de boucle les 
     #     valeurs sucsessives de la liste
+
+    #invariant continue tant que la liste est décroissante
     for i in range(len(lst_score)):
         if lst_score[i] > prec :
             return False 
@@ -327,14 +338,16 @@ def meilleur_classement(lst_j, lst_s, prenom):
     Returns:
         int: indice de la première apparition du joueur
     """
-    meilleur_s = meilleur_score(lst_j, lst_s, prenom)    
-    if meilleur_s is None :
-        return None
+
+    if lst_j == [] or lst_s == []:
+        return None  
 
     else:
+        # invariant : le prenom n'a pas été trouver dans la liste
         for i in range(len(lst_s)):
-            if lst_s[i] == meilleur_s:
+            if lst_j[i] == prenom:
                 return i 
+        return None    
 
 def test_meilleur_classement():
     assert meilleur_classement(joueurs, scores, 'Batman') == 0
@@ -358,6 +371,7 @@ def inserer_score(lst_s, score):
         i  = None
 
     else:
+        #l'emplacement ideal n'a pas été trouver 
         for i in range(len(lst_s)):
             if score > lst_s[i]:
                 return i 
