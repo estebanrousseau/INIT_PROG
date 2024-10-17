@@ -17,8 +17,8 @@ comptage3 = [0, 0, 4, 3, 2, 1, 2, 4]
 observations1 = [("Merle", 2), ("Moineau", 5), ("Pic vert", 1), ("Pie", 2),
                  ("Rouge-gorge", 3), ("Tourterelle", 5)]
 
-observations2 = [("Merle", 2), ("Mésange", 1), ("Moineau", 3),
-                 ("Pinson", 3), ("Tourterelle", 5), ("Rouge-gorge", 1)]
+observations2 = [("Merle", 2), ("Moineau", 1), ("Mésange", 3), 
+                 ("Pinson", 3), ("Rouge-gorge", 5), ("Tourterelle", 1), ]
 
 observations3 = [("Mésange", 4), ("Pic vert", 3), ("Pie", 2), ("Pinson", 1),
                  ("Rouge-gorge", 2), ("Tourterelle", 4)]
@@ -169,6 +169,9 @@ def max_oiseaux(lst):
 
     Returns:
         int: maximum d'appartion d'oiseaux et None si la liste est vide
+
+    invariant:
+        contient le nombre de fois maximal ou un oiseau à été vu 
     """
     if lst != []:
         maxi = lst[0][1]
@@ -176,3 +179,101 @@ def max_oiseaux(lst):
             if woiso[1] > maxi :
                 maxi = woiso[1]
         return maxi            
+    
+
+#-----------------------------------------------------------
+# 3.3
+#-----------------------------------------------------------
+# 
+
+def moyenne_oiseau(lst):
+    """calcule la moyenne d'oiseau rencontré
+
+    Args:
+        lst (list): liste d'observation 
+
+    Returns:
+        int : moyenne d'apparition d'oiseau
+
+    invariant:
+        cmp contient le nombre d'oiseau rencontré
+    """
+    if lst == []:
+        return 0
+
+    else:
+        cmp = 0
+        for woiso in lst :
+            cmp += woiso[1]
+        return cmp / len(lst)    
+    
+
+#--------------------------------------------------------------
+#3.4
+#--------------------------------------------------------------
+
+def compteur_meme_famille(lst_oiseau, observation, nom):
+    """compte le nombre d'oiseaux vu d'une certaine famille
+
+    Args:
+        lst_oiseau (list): liste d'oiseau 
+        observation (list): liste d'observation
+        nom (str): nom de famille de l'oiseau
+
+    Returns:
+        int: nombre d'oiseau vu 
+
+        invariant:
+            cmp contient le nombre d'oiseau vu de la famille entré en parametre
+    """
+
+    if lst_oiseau == [] or observation == []:
+        return 0
+    
+    else:
+        lst_oiseau_famille = meme_fammille(lst_oiseau, nom)
+        cmp = 0
+
+        for woiso in observation :
+            if woiso[0] in lst_oiseau_famille :
+                cmp += woiso[1]
+
+        return cmp         
+
+
+#----------------------------------------------------------------------
+#exercice 4
+#----------------------------------------------------------------------
+
+def cree_observation(lst_oiseau, lst_comptage):
+    """cree la liste d'observation vu precedement 
+
+    Args:
+        lst_oiseau (list): liste d'oiseaux
+        lst_comptage (_list): liste de comptage d'oiseau
+
+    Returns:
+        list : liste d'observation 
+
+    invariant :
+        lst_final contient le couple (nom d'oiseau , nombre vu)  , si il à été vu jusqu'à l'indice i     
+    """
+
+    if lst_comptage == [] or lst_oiseau == [] or len(lst_comptage) != len(lst_oiseau):
+        return []
+    else:
+        lst_final = []
+        for i in range(len(lst_oiseau)):
+            if lst_comptage[i] != 0:
+                lst_final.append((lst_oiseau[i][0], lst_comptage[i] ))
+        return lst_final
+    
+def nb_specimen(lst_oiseau):
+    if lst_oiseau == []:
+        return None
+    
+    else:
+        lst_comptage = []
+        for woiso in lst_oiseau:
+            lst_comptage.append(int(input('combien d\'oiseau avez vous vu ')))
+        return cree_observation(lst_oiseau, lst_comptage)    
