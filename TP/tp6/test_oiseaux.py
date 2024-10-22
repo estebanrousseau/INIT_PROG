@@ -76,29 +76,7 @@ def test_cree_observation():
     assert oiseaux.cree_observation(oiseaux.oiseaux, oiseaux.comptage2) == oiseaux.observations2
     assert oiseaux.cree_observation(oiseaux.oiseaux, oiseaux.comptage3) == oiseaux.observations3
     
+#test de la fonction nb_specimen
+#oiseaux.nb_specimen(oiseaux.oiseaux)
+#après test la fonctione fonctionne bien car on retrouve bien la liste d'observation avec les valeur d'observation 1 
 
-"""
-def test_est_liste_observations():
-    assert oiseaux.est_liste_observations(...)==...
-
-def test_max_observations():
-    assert oiseaux.max_observations(...)==...
-
-def test_moyenne_oiseaux_observes():
-    assert oiseaux.moyenne_oiseaux_observes(...)==...
-
-def test_total_famille():
-    assert oiseaux.total_famille(...)==...
-
-
-def test_construire_liste_observations():
-    assert oiseaux.construire_liste_observations(...)==...
-
-def test_creer_ligne_sup():
-    assert oiseaux.creer_ligne_sup(...)==...
-
-def test_creer_ligne_noms_oiseaux():
-    assert oiseaux.creer_ligne_noms_oiseaux(...)==...
-
-
-"""

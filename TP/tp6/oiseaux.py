@@ -267,13 +267,106 @@ def cree_observation(lst_oiseau, lst_comptage):
             if lst_comptage[i] != 0:
                 lst_final.append((lst_oiseau[i][0], lst_comptage[i] ))
         return lst_final
-    
+
+
+#-------------------------------------------------------------------------------
+#4.2
+#-------------------------------------------------------------------------------
+
+
+
 def nb_specimen(lst_oiseau):
+    """ demande à l'utilisateur le nombre d'oiseau qu'il a vu pour chaque oiseau de lst_oiseau
+
+    Args:
+        lst_oiseau (list): liste d'oiseau 
+
+    Returns:
+        list: liste d'observation 
+    invariant :
+        lst_comptage contient le nombre d'oiseau vu par l'utilisateur à chaque tour de boucle  
+    """
     if lst_oiseau == []:
         return None
     
     else:
         lst_comptage = []
         for woiso in lst_oiseau:
-            lst_comptage.append(int(input('combien d\'oiseau avez vous vu ')))
-        return cree_observation(lst_oiseau, lst_comptage)    
+            print("combien de ", woiso[0], "avez vous vu")
+            lst_comptage.append(int(input('entrez un nombre  ')))
+
+        obs = cree_observation(lst_oiseau, lst_comptage)   
+        print(obs)   
+        return obs
+    
+
+#-------------------------------------------------------------------------------
+#5.1
+#-------------------------------------------------------------------------------
+
+def affichage_obseravtion(lst_oiseau, obs):
+    """cree un affichage avec le nom de l'oiseau sa famille et le nombre de fois ou il a été vu
+
+    Args:
+        lst_oiseau (list): liste d'oiseau
+        obs (list): liste d'observation
+    """
+
+    i1,i2 = 0,0
+    while i1 < len(lst_oiseau) and i2 < len(obs):
+
+        if lst_oiseau[i1][0] == obs[i2][0]:
+
+            nom = 'Nom: ' + lst_oiseau[i1][0]
+            famille = 'Famille: ' + lst_oiseau[i1][1]
+            nb_ob = 'Nb observés: ' + str(obs[i2][1])
+            print(nom.ljust(30), famille.ljust(30), nb_ob)
+            i2 += 1 
+        i1 +=1
+
+affichage_obseravtion(oiseaux, observations1)   
+
+#-------------------------------------------------------------------------------
+#5.2
+#-------------------------------------------------------------------------------
+
+def ligne_oiseau(obs):
+    """cree la ligne final avec le nom des oiseaux
+
+    Args:
+        obs (list): liste d'observation
+
+    Returns:
+        str: la ligne des nom des oiseaux
+    """
+    res = ''
+    for woiso in obs:
+        res += woiso[0][0] +woiso[0][1] +woiso[0][2] + ' '
+    return res     
+
+
+
+def ligne_etoile(obs, nombre):
+    res = ''
+    for woiso in obs:
+        if woiso[1] >= nombre:
+            res += ' ** '
+        else:
+            res += '    '   
+
+    res += '\n'
+    return res    
+
+
+
+def affichage_etoile(obs):
+    res = ''
+    nombre_max = max_oiseaux(obs)
+    
+    for i in range(nombre_max, 0, -1):
+        res += ligne_etoile(obs, i)
+    res += ligne_oiseau(obs)
+    print(res)    
+
+affichage_etoile(observations1)
+
