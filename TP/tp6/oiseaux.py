@@ -103,7 +103,7 @@ def caracteristique(lst_oiseau, nom):
         _type_: _description_
 
     invariant :
-        l'oiseau n'a pas été trouvé    
+        l'oiseau n'a pas été trouvé à chaque tour de boucle    
     """
     for woiso in lst_oiseau :
         if woiso[0] == nom :
@@ -125,7 +125,7 @@ def meme_fammille(lst_oiseau, nom):
     Returns:
         list: mliste de tout les oiseaux
     invariant:
-        lst_final contient tout les oiseaux appartenant au nom de famille entré en parametre 
+        lst_final contient tout les oiseaux appartenant au nom de famille entré en parametre à chaque tour de boucle
     """
     lst_final = []
     for woiso in lst_oiseau:
@@ -146,7 +146,7 @@ def verif_observation(lst):
     Returns:
         bool: vrai si elle est bien construite et faux sinon
     invariant:
-        la liste d'observation est bien construite 
+        la liste d'observation est bien construite chaque tour de boucle
     """
     if lst == []:
         return False
@@ -155,7 +155,7 @@ def verif_observation(lst):
             if not type(woiso[1]) is int : 
                 return False
         return True    
-    
+    revoir
 #------------------------------------------------
 # #3.2
 # -----------------------------------------------
@@ -171,7 +171,7 @@ def max_oiseaux(lst):
         int: maximum d'appartion d'oiseaux et None si la liste est vide
 
     invariant:
-        contient le nombre de fois maximal ou un oiseau à été vu 
+        contient le nombre de fois maximal ou un oiseau à été vu chaque tour de boucle
     """
     if lst != []:
         maxi = lst[0][1]
@@ -196,7 +196,7 @@ def moyenne_oiseau(lst):
         int : moyenne d'apparition d'oiseau
 
     invariant:
-        cmp contient le nombre d'oiseau rencontré
+        cmp contient le nombre d'oiseau rencontré chaque tour de boucle
     """
     if lst == []:
         return 0
@@ -224,7 +224,7 @@ def compteur_meme_famille(lst_oiseau, observation, nom):
         int: nombre d'oiseau vu 
 
         invariant:
-            cmp contient le nombre d'oiseau vu de la famille entré en parametre
+            cmp contient le nombre d'oiseau vu de la famille entré en parametre chaque tour de boucle
     """
 
     if lst_oiseau == [] or observation == []:
@@ -392,7 +392,7 @@ def affichage_etoile(obs):
     for i in range(nombre_max, 0, -1):
         res += ligne_etoile(obs, i)
     res += ligne_oiseau(obs)
-    print(res)    
+    print(res)
 
 affichage_etoile(observations1)
 
