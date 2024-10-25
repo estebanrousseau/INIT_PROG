@@ -310,7 +310,10 @@ def affichage_obseravtion(lst_oiseau, obs):
     Args:
         lst_oiseau (list): liste d'oiseau
         obs (list): liste d'observation
-    """
+    
+    invariant:
+        i1 contient l'indice de la première liste parcouru
+        i2 contient l'indice de la seconde liste parcouru   """
 
     i1,i2 = 0,0
     while i1 < len(lst_oiseau) and i2 < len(obs):
@@ -338,6 +341,9 @@ def ligne_oiseau(obs):
 
     Returns:
         str: la ligne des nom des oiseaux
+
+    invariant:
+        res contient les 3 premières lettres des oiseaux parcouru    
     """
     res = ''
     for woiso in obs:
@@ -347,6 +353,18 @@ def ligne_oiseau(obs):
 
 
 def ligne_etoile(obs, nombre):
+    """permet d'afficher une ligne avec un nombre donné
+
+    Args:
+        obs (list): liste_observation
+        nombre (int): nombre 
+
+    Returns:
+        str: ligne à afficher
+
+    invariant:
+        res contient l'affichage attendu pour chaque oiseau parcouru    
+    """
     res = ''
     for woiso in obs:
         if woiso[1] >= nombre:
@@ -360,6 +378,14 @@ def ligne_etoile(obs, nombre):
 
 
 def affichage_etoile(obs):
+    """affiche l'affiche souhaité en fonction de la liste d'observation d'oiseau 
+
+    Args:
+        obs (list): liste d'observation
+
+    invariant:
+        res contient l'affichage de chaque ligne jusqu'à i iteration    
+    """
     res = ''
     nombre_max = max_oiseaux(obs)
     
