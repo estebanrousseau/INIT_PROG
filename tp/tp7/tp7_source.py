@@ -94,7 +94,7 @@ def sauve_population_dpt(nom_fic, liste_pop_dep):
     ...
 
 # appel au programme principal
-#programme_principal()
+programme_principal()
 
 
 
@@ -102,4 +102,4 @@ liste_options = ["Charger un fichier",
                     "Rechercher la population d'une commune",
                     "Afficher la population d'un département", 
                     "Quitter"]
-afficher_menu('t',liste_options)
+#afficher_menu('t',liste_options)

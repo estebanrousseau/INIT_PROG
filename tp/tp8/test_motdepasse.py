@@ -36,3 +36,16 @@ def test_trois_app_chiffre():
     assert not motdepasse.trois_app_chif("chou")       # pas de chiffres
     assert not motdepasse.trois_app_chif("un deux trois") # pas de chiffres
 
+def test_suite_chif_ok():
+    assert motdepasse.chif_suite_ok('')
+    assert motdepasse.chif_suite_ok('fdezgtergergt')
+    assert motdepasse.chif_suite_ok('gfezgerg4gfez')
+    assert not motdepasse.chif_suite_ok('11')
+    assert not motdepasse.chif_suite_ok('dzadza12dzadzadza2d')
+
+def test_plus_petit_chiffre():
+    assert motdepasse.plus_petit_chiffre_ok('fhrhfhhrhfhhgherg123')
+    assert motdepasse.plus_petit_chiffre_ok('fhrhfhhrhfhhgherg1233333')
+    assert motdepasse.plus_petit_chiffre_ok('fhrhfhhrhfhhgherg123')
+    assert not motdepasse.plus_petit_chiffre_ok('fhrhf1hhrhfhhgherg123')
+    assert not motdepasse.plus_petit_chiffre_ok('')

@@ -118,7 +118,7 @@ def new_dialogue_mdp():
 
     return mdp             
 
-new_dialogue_mdp()
+#new_dialogue_mdp()
 
 #----------------------------------
 # exercice2 
@@ -167,7 +167,7 @@ def plus_petit_chiffre_ok(car):
     Returns:
         bool : vrai si le plus petit chiffre n'est present qu'une fois 
     """
-    dico_apparttion = {}
+    dico_apparttion = {10 : False}
 
     mini = 10 
     for lettre in car :
@@ -178,8 +178,79 @@ def plus_petit_chiffre_ok(car):
                 mini = val
 
             if val not in dico_apparttion:
-                dico_apparttion[val] = 0
+                dico_apparttion[val] = 1
             else:
                 dico_apparttion[val] += 1
 
     return dico_apparttion[mini] == 1                    
+
+
+
+
+
+
+def new_dialogue_mdp_2():
+
+    mdp = False
+    while not mdp :
+        login = input('entrez votre mot de passe: ')
+        if not longueur_ok(login):
+            print('la longueur du mot de passse doit est superieur à 8')
+
+        elif not sans_espace(login):
+            print('le mot de passe ne doit pas contenir d\'espace')
+
+        elif not trois_app_chif(login):
+            print('le mot de passe doit contenir au moins trois chiffre')
+
+        elif not chif_suite_ok(login):
+            print('deux chiffres ne doivent pas etre successifs ')
+
+        elif not plus_petit_chiffre_ok(login):
+            print('le plus petit chifre ne doit apparaitre qu\'une fois')    
+
+        else :
+            mdp = True   
+            print('le mot de passe est correct ')  
+
+    return mdp 
+
+#new_dialogue_mdp_2()
+
+
+
+#---------------------------------- 
+#exercice 3 
+#----------------------------------
+
+def new_dialogue_mdp_3():
+
+    mdp = False
+    while not mdp :
+        login = input('entrez votre nom: ')
+        mot_de_pass = input('entrez votre mot de passe: ')
+
+        if not longueur_ok(mot_de_pass):
+            print('la longueur du mot de passse doit est superieur à 8')
+
+        elif not sans_espace(mot_de_pass):
+            print('le mot de passe ne doit pas contenir d\'espace')
+
+        elif not trois_app_chif(mot_de_pass):
+            print('le mot de passe doit contenir au moins trois chiffre')
+
+        elif not chif_suite_ok(mot_de_pass):
+            print('deux chiffres ne doivent pas etre successifs ')
+
+        elif not plus_petit_chiffre_ok(mot_de_pass):
+            print('le plus petit chifre ne doit apparaitre qu\'une fois')    
+
+        else :
+            mdp = True   
+            print('le mot de passe est correct ')  
+            fic = open('mdpUltraSecret', 'a')
+            fic.write(str(mot_de_pass) + ',' +  login)
+            fic.close()
+
+    return mdp 
+new_dialogue_mdp_3()
