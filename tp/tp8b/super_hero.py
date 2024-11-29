@@ -22,6 +22,7 @@ def intelligence_moyenne(dico):
     if len(dico) == 0:
         return None 
     else :
+        
         intel_tot = 0
         for val in dico.values():
             intel_tot += val[1]
