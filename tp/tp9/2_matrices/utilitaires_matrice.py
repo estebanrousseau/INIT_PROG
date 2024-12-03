@@ -10,7 +10,7 @@ def get_val_mat(matrice):
         matrice (tuple): une matrice 
 
     Returns:
-        : 
+        les valeur le la matrice: 
     """
     return [m.get_val(matrice, i, j) for i in range(m.get_nb_lignes(matrice)) for j in range(m.get_nb_colonnes(matrice))]
 
@@ -24,7 +24,7 @@ def get_ligne(matrice,ligne):
     Returns:
         list: la ligne concerné
     """
-    return [m.get_val(matrice, i, j) for i in range(m.get_nb_lignes(matrice)) for j in range(m.get_nb_colonnes(matrice))][ligne * m.get_nb_colonnes(matrice) : ligne * m.get_nb_colonnes(matrice) + m.get_nb_colonnes(matrice)]
+    return get_val_mat(matrice)[ligne * m.get_nb_colonnes(matrice) : ligne * m.get_nb_colonnes(matrice) + m.get_nb_colonnes(matrice)]
 
 
 def get_colonnes(matrice, colonne):
@@ -37,7 +37,7 @@ def get_colonnes(matrice, colonne):
     Returns:
         list: liste d'une colonne
     """
-    return [matrice[2][i + colonne] for i in range(0, len(matrice[2]))]
+    return [m.get_val(matrice, i, colonne) for i in range(m.get_nb_lignes(matrice))]
 
 
 def get_diagonale_principale(matrice):
@@ -49,7 +49,7 @@ def get_diagonale_principale(matrice):
     Returns:
         list: liste contenant la digonale pricipale de la matrice 
     """
-    return [get_val(matrice, i, i) for i in range(get_nb_lignes(matrice))]
+    return [m.get_val(matrice, i, i) for i in range(m.get_nb_lignes(matrice))]
 
 
 
@@ -64,31 +64,29 @@ def get_diagonale_secondaire(matrice):
     """
     lst_final = []
     ligne = 0
-    nb_col = get_nb_colonnes(matrice)
+    nb_col = m.get_nb_colonnes(matrice)
 
     for i in range(nb_col - 1, -1, -1):
-        lst_final.append(get_val(matrice, ligne, i))
+        lst_final.append(m.get_val(matrice, ligne, i))
         ligne += 1
     return lst_final
 
 
 
 def transpose(matrice_int):
-    mat = matrice(get_nb_colonnes(matrice_int), get_nb_lignes(matrice_int), 0)
+    mat = m.matrice(m.get_nb_colonnes(matrice_int), m.get_nb_lignes(matrice_int), 0)
 
-    for i in range(get_nb_colonnes(matrice_int)):
+    for i in range(m.get_nb_colonnes(matrice_int)):
 
         ligne = get_colonnes(matrice_int, i)
         for j in range(len(ligne)):
-            set_val(mat, i, j, ligne[j])
+            m.set_val(mat, i, j, ligne[j])
 
     return mat
 
 
-
-mat1 = (3, 4, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21])
-
-
-
-m.affiche(mat1)
-#print(transpose(mat1))
+def is_triangulaire(mat):
+    taille = m.get_nb_colonnes(mat)
+    for ligne in range(taille):
+        for colonne in range(ligne + 1, taille):
+            if 

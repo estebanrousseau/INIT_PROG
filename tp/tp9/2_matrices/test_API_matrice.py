@@ -110,3 +110,10 @@ def test_get_diago():
     assert u.get_diagonale_secondaire(mat) == [6, 5, 4]
 
 
+
+mat1 = matrice1()
+mat_trans = u.transpose(mat1)
+API.affiche(mat_trans)
+
+
+
