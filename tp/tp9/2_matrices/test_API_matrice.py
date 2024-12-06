@@ -85,6 +85,7 @@ def test_sauve_charge_matrice():
 
     la_matrice = matrice2()
     API.sauve_matrice(la_matrice, "matrice.csv")
+    
     matrice_bis = API.charge_matrice_str("matrice.csv")
     assert la_matrice == matrice_bis
 """
@@ -109,11 +110,42 @@ def test_get_diago():
 
     assert u.get_diagonale_secondaire(mat) == [6, 5, 4]
 
+def test_transpose():
+    mat1 = matrice1()
+    mat2 = matrice2()
+    mat3 = matrice3()
+
+    assert u.transpose(mat1) == (4, 3, [10, 14, 18, 11, 15, 19, 12, 16, 20, 13, 17, 21])
+    assert u.transpose(mat2) == (3, 2, ['A', 'D', 'B', 'E', 'C', 'F'])
+    assert u.transpose(mat3) == (3, 3, [2, 9, 4, 7, 5, 3, 6, 1 ,8])
+
+def test_is_triangulaire():
+    mat1_tri = (3, 3, [1, 0, 0, 2, 3, 0, 3, 4, 5])
+    mat2_tri = (4, 4, [1, 0, 0, 0, 2, 3, 0, 0, 3, 4, 5, 0, 5, 5, 5, 5])
+    mat3_pas_tri = (3, 3, [1, 0, 0, 2, 3, 1, 3, 4, 5])
+    mat4_pas_tri = (4, 4, [1, 0, 0, 4, 2, 3, 0, 0, 3, 4, 5, 0, 5, 5, 5, 5])
+
+    assert u.is_triangulaire(mat1_tri)
+    assert u.is_triangulaire(mat2_tri)
+    assert not u.is_triangulaire(mat3_pas_tri)
+    assert not u.is_triangulaire(mat4_pas_tri)
+
+def test_block():
+    mat1 = matrice1()
+    
+    assert u.block(mat1, 1, 1, 2, 3) == (2, 3, [15, 16, 17, 19, 20, 21])
+    assert u.block(mat1, 0, 1, 3, 3) == (3, 3, [11, 12, 13, 15, 16, 17, 19, 20, 21])
+    assert u.block(mat1, 0, 1, 0, 3) == (0, 3, [])
+    assert u.block(mat1, 0, 0, 3, 4) == matrice1()
+    assert u.block(mat1, 2, 3, 1, 1) == (1, 1, [21])
+    assert u.block(mat1, 0, 3, 3, 1) == (3, 1, [13, 17, 21])
+
+    assert u.block(mat1, 5, 5, 1, 1) is None
+    assert u.block(mat1, 2, 5, 1, 1) is None
+    assert u.block(mat1, 1, 1, 18, 1) is None
+    assert u.block(mat1, 2, 2, 1, 19) is None
 
 
-mat1 = matrice1()
-mat_trans = u.transpose(mat1)
-API.affiche(mat_trans)
 
 
 

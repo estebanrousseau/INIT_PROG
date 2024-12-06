@@ -74,6 +74,14 @@ def get_diagonale_secondaire(matrice):
 
 
 def transpose(matrice_int):
+    """transpose la matrice 
+
+    Args:
+        matrice_int (tuple): la matrice
+
+    Returns:
+        tuple: la transposé
+    """
     mat = m.matrice(m.get_nb_colonnes(matrice_int), m.get_nb_lignes(matrice_int), 0)
 
     for i in range(m.get_nb_colonnes(matrice_int)):
@@ -86,7 +94,40 @@ def transpose(matrice_int):
 
 
 def is_triangulaire(mat):
+    """trouve si la matrice est triangulaire 
+
+    Args:
+        mat (tuple): la matrice
+
+    Returns:
+        bool: vrai si triangulaire et faux sinon 
+    """
     taille = m.get_nb_colonnes(mat)
     for ligne in range(taille):
         for colonne in range(ligne + 1, taille):
-            if 
+            if m.get_val(mat, ligne, colonne) != 0 :
+                return False
+    return True
+
+def block(mat, ligne, colonne, hauteur, largeur):
+    """renvoie le sous bloc commençant à une ligne et colonne donné et allant à une hauteur et largeur donné 
+
+    Args:
+        mat (tuple): la matrice
+        ligne (int): ligne de depart
+        colonne (int): colonne de depart 
+        hauteur (int): hauteur de la sous matrice
+        largeur (int): largeur de la matrice
+
+    Returns:
+        tuple: la sous matrice 
+    """
+    if ligne + hauteur  > m.get_nb_lignes(mat) or colonne + largeur > m.get_nb_colonnes(mat):
+        return None
+    
+    else:
+        mat_final = m.matrice(hauteur, largeur, 0)
+        for lig in range(hauteur):
+            for col in range(largeur):
+                m.set_val(mat_final,lig, col, m.get_val(mat, ligne + lig, colonne + col))
+        return mat_final        
