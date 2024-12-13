@@ -137,9 +137,9 @@ def test_v1_to_v2():
     (pokedex_anakin_v2, pokedex_romain_v2) = exemples_pokedex_v2()    
     assert pokedex.v1_to_v2(pokedex_anakin_v1) == pokedex_anakin_v2
     assert pokedex.v1_to_v2(pokedex_romain_v1) == pokedex_romain_v2
-"""
+
 def test_v2_to_v3():
     (pokedex_anakin_v3, pokedex_romain_v3) = exemples_pokedex_v3()
     (pokedex_anakin_v2, pokedex_romain_v2) = exemples_pokedex_v2()    
     assert pokedex.v2_to_v3(pokedex_anakin_v2) == pokedex_anakin_v3
-    assert pokedex.v2_to_v3(pokedex_romain_v2) == pokedex_romain_v3"""
+    assert pokedex.v2_to_v3(pokedex_romain_v2) == pokedex_romain_v3

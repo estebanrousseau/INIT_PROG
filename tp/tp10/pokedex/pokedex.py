@@ -240,5 +240,10 @@ def v2_to_v3(pokedex_v2):
     renvoie le même pokedex mais en version3
     """
     dico_v3 = {}
-    
+    for poke, ens_type in pokedex_v2.items():
+        for type in ens_type:
+            if type not in dico_v3:
+                dico_v3[type] = set()
+            dico_v3[type].add(poke)
+    return dico_v3            
 

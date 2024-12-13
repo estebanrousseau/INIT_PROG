@@ -26,5 +26,10 @@ def exmple2(dico):
     for cle in dico:
         print( dico[cle] )
 
-exemple1(dico)
-exmple2(dico)
+#exemple1(dico)
+#exmple2(dico)
+
+a = 'abufediuzhifiuhe'
+print(list(a))
+
+print(type(str(list(a))))

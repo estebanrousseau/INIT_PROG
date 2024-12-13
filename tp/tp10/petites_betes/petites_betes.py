@@ -15,8 +15,20 @@ def pokemon_par_famille(liste_pokemon):
     Returns:
         dict: le dictionnaire nom_famille ensemble des noms de pokemon de cette famille
     """
-    ...
+    dico_final = {}
+    for nom, ens_att, _ in liste_pokemon:
+        for att in ens_att:
+            if att not in dico_final:
+                dico_final[att] = set()
+            dico_final[att].add(nom) 
+    return dico_final           
 
 def test_pokemon_par_famille():
-    ...
+    ma_liste_pokemon =[
+    ('Bulbizarre ', {'Plante ', 'Poison '}, '001. png'),
+    ('Herbizarre ', {'Plante ', 'Poison '}, '002. png'),
+    ('Abo', {'Poison '}, '023. png'),
+    ('Jungko ', {'Plante '}, '254. png')]
+
+    assert pokemon_par_famille(ma_liste_pokemon) == {'Plante ':{'Bulbizarre ', 'Herbizarre ', 'Jungko '}, 'Poison ':{'Bulbizarre ', 'Herbizarre ', 'Abo'}}
     

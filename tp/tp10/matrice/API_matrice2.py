@@ -12,7 +12,10 @@ def matrice(nb_lignes, nb_colonnes, valeur_par_defaut):
     Returns:
         une nouvelle matrice qui contient la valeur par défaut dans chacune de ses cases
     """
-    ...
+    return [[valeur_par_defaut for i in range(nb_colonnes)] for _ in range(nb_lignes)]
+
+
+
 
 def set_val(la_matrice, ligne, colonne, nouvelle_valeur):
     """permet de modifier la valeur de l'élément qui se trouve à la ligne et à la colonne
@@ -27,7 +30,11 @@ def set_val(la_matrice, ligne, colonne, nouvelle_valeur):
     Returns:
         None
     """
-    ...
+  
+    la_matrice[ligne][colonne] = nouvelle_valeur
+
+
+
 
 def get_nb_lignes(la_matrice):
     """permet de connaître le nombre de lignes d'une matrice
@@ -38,7 +45,12 @@ def get_nb_lignes(la_matrice):
     Returns:
         int : le nombre de lignes de la matrice
     """
-    ...
+
+    return len(la_matrice)
+
+
+
+
 
 def get_nb_colonnes(la_matrice):
     """permet de connaître le nombre de colonnes d'une matrice
@@ -49,7 +61,10 @@ def get_nb_colonnes(la_matrice):
     Returns:
         int : le nombre de colonnes de la matrice
     """
-    ...
+    return len(la_matrice[0])
+
+
+
 
 def get_val(la_matrice, ligne, colonne):
     """permet de connaître la valeur de l'élément de la matrice dont on connaît
@@ -63,7 +78,34 @@ def get_val(la_matrice, ligne, colonne):
     Returns:
         la valeur qui est dans la case située à la ligne et la colonne spécifiées
     """
-    ...
+    return la_matrice[ligne][colonne]
+
+
+
+def get_ligne(mat, ligne):
+    """renvoie une ligne de la matrice 
+
+    Args:
+        mat (list): matrice
+        ligne (int): indice de ligne
+
+    Returns:
+        list: la ligne demandé
+    """
+    return mat[ligne]
+
+def get_colonne(mat, col):
+    """renvoie une colonne de la matrice 
+
+    Args:
+        mat (list): matrice
+        col (int): indice de la colonne
+
+    Returns:
+        list: la ligne demandé
+    """
+    return [val[col] for val in range(get_nb_lignes(mat))]
+
 
 # Fonctions pour l'affichage
 
